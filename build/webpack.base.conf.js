@@ -2,12 +2,12 @@ const Entry = require('./webpack.entry');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
-
+const process = require('process');
 const root = process.cwd();
 const config = {
   entry: Object.assign({}, Entry, {
-    verdon1: ['vue', 'normalize.css', 'vuex'],
-    verdon2: ['$css/common.css', '$js/common.js']
+    verdon1: ['normalize.css'],
+    verdon2: ['src/assert/css/common.css']
   }),
   output: {
     publicPath: '/',
@@ -16,25 +16,21 @@ const config = {
     chunkFilename: 'id.[chunkhash].js'
   },
   resolve: {
-    extensions: ['.js', '.vue', '.css'],
+    extensions: ['.js', 'jsx', '.css'],
     alias: {
-      $components: path.resolve(root, 'src/assert/components'),
-      $css: path.resolve(root, 'src/assert/css'),
-      $js: path.resolve(root, 'src/assert/js'),
-      $tem: path.resolve(root, 'src/assert/templates'),
-      vue$: 'vue/dist/vue.esm.js'
+      src: path.resolve(root, 'src')
     }
   },
   module: {
     rules: [
       {
-        test: /\.vue$/,
-        loader: 'vue-loader'
-      },
-      {
-        test: /\.js$/,
+        test: /\.js|jsx$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        options:
+        {
+          presets:['react']
+        }
       },
       {
         test: /\.css$/,

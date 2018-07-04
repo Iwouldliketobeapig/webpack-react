@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const path = require('path');
 const chalk = require('chalk');
 const root = process.cwd();
-const merge = require('webpack-merge')
+const merge = require('webpack-merge');
 const config = require(root + '/config/default');
 const CommonsChunkPlugin = require('./CommonsChunkPlugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
@@ -17,7 +17,7 @@ const devWebpack = merge(BaseConf, {
   module: {
     rules: [
       {
-        test: /\.(js|vue)$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loaders: 'eslint-loader'
       }
@@ -33,7 +33,7 @@ const devWebpack = merge(BaseConf, {
     compress: true,
     port: 9000,
     after () {
-      console.log('this proxy host and port is ' + chalk.yellow(config.proxy.target) + 
+      console.log('this proxy host and port is ' + chalk.yellow(config.proxy.target) +
       ' and this api version is ' + chalk.yellow(config.proxy.apiVersion));
     }
   },
@@ -48,13 +48,13 @@ const devWebpack = merge(BaseConf, {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new StyleLintPlugin({
-      files: ['**/*.s?(a|c)ss', '**/*.vue'],
+      files: ['**/*.s?(a|c)ss'],
       syntax: 'scss'
     }),
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(false)
     })
   ]
-})
+});
 
 module.exports = devWebpack;

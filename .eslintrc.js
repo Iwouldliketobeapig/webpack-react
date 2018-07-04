@@ -1,6 +1,9 @@
 module.exports = {
-	extends: ["vue", "plugin:vue/base"],
-	plugins: ['html'],
+	"extends": ["plugin:react/recommended"],
+	"env": {
+		"browser": true,
+		"node": true,
+	},
 	globals: {
 		Promise: true,
 		module: true,

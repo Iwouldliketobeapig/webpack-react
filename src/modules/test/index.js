@@ -1,9 +1,6 @@
-import Vue from '$js/vue';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
 import App from './App';
 
-new Vue({
-  template: '<App></App>',
-  components: {
-    App
-  }
-}).$mount('#app');
+ReactDOM.render(<App />, document.getElementById('app'));
